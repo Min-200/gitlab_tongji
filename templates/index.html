@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="{% static 'Codemanagement/echarts/echarts.min.js' %}"></script>
+    <title>Title</title>
+    <h1> {{ hello }}</h1>
+</head>
+<body>
+    <a href="http://192.168.194.149:8000/get_gitlab"><font size="6" face="arial">GITLAB统计</font></a>
+    <a href="http://192.168.194.149/"><font size="6" face="arial">项目列表</font></a>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1300px;height:400px;"></div>
+    <div id="main1" style="width:1300px;height:400px;"></div>
+    <div id="main2" style="width:1300px;height:400px;"></div>
+    <div id="main3" style="width:1300px;height:400px;"></div>
+    <div id="main4" style="width:1300px;height:400px;"></div>
+    <div id="main5" style="width:1300px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总提交数(最近一周)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	data: {{ Pre_Seven_day|safe }}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ Pre_Seven_data|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	
+	var myChart1 = echarts.init(document.getElementById('main1'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总提交数(最近一个月)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	data: {{ X_list|safe}}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ commit_list|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option);
+
+	var myChart2 = echarts.init(document.getElementById('main2'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总文件数(最近一周)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: {{ Pre_Seven_day|safe }}
+
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ Pre_Seven_file_data|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option);
+
+
+	var myChart3 = echarts.init(document.getElementById('main3'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总文件数(最近一个月)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: {{ X_list|safe}}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ Y_file_list|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart3.setOption(option);
+
+	var myChart4 = echarts.init(document.getElementById('main4'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总代码行数(最近一周)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: {{ Pre_Seven_day|safe}}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ Pre_Seven_line_data|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart4.setOption(option);
+
+	var myChart5 = echarts.init(document.getElementById('main5'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '总代码行数(最近一个月)',
+        subtext: '数据来自gitstat',
+        left: 'center',
+        align: 'right'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: {{ X_list|safe}}
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+    {
+        data: {{ Y_line_list|safe }},
+        type: 'line'
+    }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart5.setOption(option);
+
+    </script>
+</body>
+</html>
+
